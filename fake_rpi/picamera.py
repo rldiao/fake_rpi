@@ -23,30 +23,49 @@ class BGR(object):
         self.array = np.random.rand(*self.array.shape)
 
 
-# class picamera(object):
-#     """Fake class"""
 class PiCamera(Base):
     """Fake class"""
     resolution = (0, 0)
+    AWB_MODES = {
+        'off': 0,
+        'auto': 1,
+        'sunlight': 2,
+        'cloudy': 3,
+        'shade': 4,
+        'tungsten': 5,
+        'fluorescent': 6,
+        'incandescent': 7,
+        'flash': 8,
+        'horizon': 9,
+    }
 
     def __init__(self, resolution=None):
-        # empty constructor
-        # print('WARNING: Fake_RPi PiCamera on {}'.format(platform.system().lower()))
         Base.__init__(self, self.__class__)
-        pass
+
+        self.closed = False
+        self.awb_mode = 'auto'
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
+        self.close()
 
     def close(self):
+        self.closed = True
+
+    @printf
+    def capture(self, output, format=None, use_video_port=False, resize=None, splitter_port=0, **options):
         # this does nothing
         pass
 
     @printf
-    def capture(self, output, format=None, use_video_port=False, resize=None, splitter_port=0, **options):
+    def start_preview(self, **options):
+        # this does nothing
+        pass
+
+    @printf
+    def stop_preview(self, **options):
         # this does nothing
         pass
 
