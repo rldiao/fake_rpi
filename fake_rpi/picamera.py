@@ -39,11 +39,36 @@ class PiCamera(Base):
         'horizon': 9,
     }
 
+    METER_MODES = {
+        'average': 0,
+        'spot': 1,
+        'backlit': 2,
+        'matrix': 3,
+    }
+
+    EXPOSURE_MODES = {
+        'off': 0,
+        'auto': 1,
+        'night': 2,
+        'nightpreview': 3,
+        'backlight': 4,
+        'spotlight': 5,
+        'sports': 6,
+        'snow': 7,
+        'beach': 8,
+        'verylong': 9,
+        'fixedfps': 10,
+        'antishake': 11,
+        'fireworks': 12,
+    }
+
     def __init__(self, resolution=None):
         Base.__init__(self, self.__class__)
 
         self.closed = False
         self.awb_mode = 'auto'
+        self.exposure_mode = 'auto'
+        self.meter_mode = 'average'
         self.preview = None
 
     def __enter__(self):
