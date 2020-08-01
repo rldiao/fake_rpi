@@ -44,6 +44,7 @@ class PiCamera(Base):
 
         self.closed = False
         self.awb_mode = 'auto'
+        self.preview = None
 
     def __enter__(self):
         return self
@@ -62,12 +63,17 @@ class PiCamera(Base):
     @printf
     def start_preview(self, **options):
         # this does nothing
-        pass
+        self.preview = PiRenderer()
 
     @printf
     def stop_preview(self, **options):
         # this does nothing
-        pass
+        self.preview = None
+
+
+class PiRenderer(object):
+    """Fake class"""
+    pass
 
 
 class array(object):
